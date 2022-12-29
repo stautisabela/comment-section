@@ -22,6 +22,12 @@ public class PostController {
 	@Autowired
 	private PostService service;
 	
+	@GetMapping
+	public ResponseEntity<List<Post>> findAll() {
+		List<Post> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Post> findById(@PathVariable String id){
 		Post post = service.findById(id);

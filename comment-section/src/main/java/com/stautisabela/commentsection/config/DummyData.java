@@ -38,19 +38,19 @@ public class DummyData implements CommandLineRunner {
 		userRepository.saveAll(Arrays.asList(user1, user2, user3, user4));
 		
 		postRepository.deleteAll();
-		Post post1 = new Post(null, new AuthorDTO(user1), sdf.parse("10/07/2020"), "Blah blah", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pulvinar mauris orci, sit amet porttitor arcu sollicitudin aliquam.");
-		Post post2 = new Post(null, new AuthorDTO(user2), sdf.parse("10/07/2020"), "Blah blah", "Nullam id magna a felis tempor dapibus. Ut ac libero est. Integer tincidunt nibh eget sagittis lacinia. Morbi bibendum, libero in ultricies faucibus, metus nisi efficitur felis, sit amet congue lectus mi a mauris. Nunc ac dui hendrerit, tincidunt eros sit amet, feugiat eros.");
-		Post post3 = new Post(null, new AuthorDTO(user2), sdf.parse("10/07/2020"), "Blah blah", "Maecenas et luctus leo. Suspendisse vel arcu egestas, viverra purus et, hendrerit metus.");
-		Post post4 = new Post(null, new AuthorDTO(user3), sdf.parse("10/07/2020"), "Blah blah", "Nunc pellentesque risus at rutrum ornare.");
-		Post post5 = new Post(null, new AuthorDTO(user4), sdf.parse("10/07/2020"), "Blah blah", "Nunc pellentesque eleifend porta. Aliquam erat volutpat. Nullam vel leo ante. Sed dapibus ante nunc, sit amet sagittis est auctor ac.");
-		postRepository.saveAll(Arrays.asList(post1, post2, post3, post4, post5));
+		Post post1 = new Post(null, new AuthorDTO(user1), sdf.parse("08/07/2020"), "First post", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pulvinar mauris orci, sit amet porttitor arcu sollicitudin aliquam.");
+		Post post2 = new Post(null, new AuthorDTO(user2), sdf.parse("10/07/2020"), "Second post", "Nullam id magna a felis tempor dapibus. Ut ac libero est. Integer tincidunt nibh eget sagittis lacinia. Morbi bibendum, libero in ultricies faucibus, metus nisi efficitur felis, sit amet congue lectus mi a mauris. Nunc ac dui hendrerit, tincidunt eros sit amet, feugiat eros.");
+		CommentDTO com1 = new CommentDTO("Maecenas et luctus leo.", sdf.parse("09/07/2020"), new AuthorDTO(user3));
+		CommentDTO com2 = new CommentDTO("Nunc pellentesque risus at rutrum ornare.", sdf.parse("09/07/2020"), new AuthorDTO(user4));
+		CommentDTO com3 = new CommentDTO("Aliquam erat volutpat. Nullam vel leo ante.", sdf.parse("10/07/2020"), new AuthorDTO(user3));
+		CommentDTO com4 = new CommentDTO("Nunc pellentesque eleifend porta.", sdf.parse("11/07/2020"), new AuthorDTO(user1));
 		
-		CommentDTO com1 = new CommentDTO("text", sdf.parse("20/07/2020"), new AuthorDTO(user3));
+		post1.getComments().addAll(Arrays.asList(com1, com2));
+		post2.getComments().addAll(Arrays.asList(com3, com4));
+		postRepository.saveAll(Arrays.asList(post1, post2));
 		
-		post1.getComments().addAll(Arrays.asList(com1));
 		user1.getPosts().add(post1);
-		userRepository.save(user1);
-		user2.getPosts().addAll(Arrays.asList(post2, post3));
-		userRepository.save(user2);
+		user2.getPosts().add(post2);
+		userRepository.saveAll(Arrays.asList(user1, user2));
 	}
 }
