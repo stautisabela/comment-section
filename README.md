@@ -1,6 +1,6 @@
 # Comment section
 
-API REST developed with Java and Spring Boot as an aggregate-oriented database assignment for my Databases course in university, in 2021.
+REST API developed with Java and Spring Boot as an aggregate-oriented database assignment for my Databases course in university, in 2021.
 
 The project simulates a comment section in which users can create posts and add comments to existing posts. Data is stored as JSON-like documents in MongoDB.
 
